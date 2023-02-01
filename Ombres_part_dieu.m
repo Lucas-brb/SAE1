@@ -5,7 +5,7 @@ Sommets_part_dieu = Sommets;
 [l,~] = size(Triangles);
 Triangles_part_dieu = [Triangles 6*ones(l,1)]; %load donne le nom Sommets et Triangles, on leur donne un nom plus explicite
 [Sommets_bat,Triangles_bat] = Batiment();
-[Triangles_bat,Sommets_bat] = Tesselation(Triangles_bat,Sommets_bat,160);
+[Triangles_bat,Sommets_bat] = Tesselation(Triangles_bat,Sommets_bat,10);
 [Sommets1,Triangles1] = Concatenation(Triangles_part_dieu,Sommets_part_dieu,Triangles_bat,Sommets_bat);
 Sommets_sol = [
     -350 -350 0
@@ -15,7 +15,7 @@ Sommets_sol = [
 Triangles_sol = [
     1 2 3 10
     1 3 4 10];
-[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,400);
+[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,10);
 [Sommets,Triangles] = Concatenation(Triangles1,Sommets1,Triangles_sol,Sommets_sol);
 [Source,~,~] = Calcul_position_soleil([10 01 2023], [10 00], [45 45 37.4 ; 4 51 51.3]);
 Source = Source/1E5;
@@ -51,3 +51,4 @@ for i = 1:l
 end
 toc
 view(-47,63)
+saveas(gcf,'Tesselation_10m2.png')
