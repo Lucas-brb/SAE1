@@ -15,7 +15,7 @@ Sommets_sol = [
 Triangles_sol = [
     1 2 3 10
     1 3 4 10];
-[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,400);
+[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,1600);
 [Sommets,Triangles] = Concatenation(Triangles1,Sommets1,Triangles_sol,Sommets_sol);
 [Source,~,~] = Calcul_position_soleil([10 01 2023], [10 00], [45 45 37.4 ; 4 51 51.3]);
 Source = Source/1E3;
