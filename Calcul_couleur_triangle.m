@@ -8,5 +8,5 @@ if Test_triangle_tourne_vers_source(A,B,C,Source)
 else
     c = K;
 end
-C = [c c c];
+C = [0.574*c 0.8766*c c];
 end
