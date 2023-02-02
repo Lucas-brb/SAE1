@@ -5,6 +5,7 @@ Sommets_part_dieu = Sommets;
 [l,~] = size(Triangles);
 Triangles_part_dieu = [Triangles 6*ones(l,1)]; %load donne le nom Sommets et Triangles, on leur donne un nom plus explicite
 [Sommets_bat,Triangles_bat] = Batiment();
+[Sommets_ombres,Triangles_ombres] = Concatenation(Triangles_part_dieu,Sommets_part_dieu,Triangles_bat,Sommets_bat);
 [Triangles_bat,Sommets_bat] = Tesselation(Triangles_bat,Sommets_bat,160);
 [Sommets1,Triangles1] = Concatenation(Triangles_part_dieu,Sommets_part_dieu,Triangles_bat,Sommets_bat);
 Sommets_sol = [
@@ -15,7 +16,7 @@ Sommets_sol = [
 Triangles_sol = [
     1 2 3 10
     1 3 4 10];
-[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,1600);
+[Triangles_sol,Sommets_sol] = Tesselation(Triangles_sol,Sommets_sol,400);
 [Sommets,Triangles] = Concatenation(Triangles1,Sommets1,Triangles_sol,Sommets_sol);
 [Source,~,~] = Calcul_position_soleil([10 01 2023], [10 00], [45 45 37.4 ; 4 51 51.3]);
 Source = Source/1E5;
@@ -27,7 +28,7 @@ for i = 1:l
     if Triangles(i,4) ~= 6
         if Test_triangle_tourne_vers_source(Sommets(Triangles(i,1),:),Sommets(Triangles(i,2),:),Sommets(Triangles(i,3),:),Source)
             c = centre_gravite(Sommets(Triangles(i,1),:),Sommets(Triangles(i,2),:),Sommets(Triangles(i,3),:));
-            if Test_intersection_Segment_Objet(c,Source,Triangles,Sommets,Triangles1)
+            if Test_intersection_Segment_Objet(c,Source,Triangles_ombres,Sommets_ombres)
                 Couleurs(i,:) = [0.05 0.05 0.05];
             else
                 Couleurs(i,:) = Calcul_couleur_triangle(Sommets(Triangles(i,1),:),Sommets(Triangles(i,2),:),Sommets(Triangles(i,3),:), Source);
@@ -51,4 +52,4 @@ for i = 1:l
 end
 toc
 view(-47,63)
-saveas(gcf,'Tesselation_10m2.png')
+saveas(gcf,'Tesselation_1m2.png')
