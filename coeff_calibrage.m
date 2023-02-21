@@ -4,7 +4,7 @@ min=heure(1)*60 + heure(2);
 
 [l,~]=size(Triangles);
 for i=1:l
-    if Triangles(i,4)==0
+    if Triangles(i,4)==10
         T=Triangles(i,:);
         break
     end

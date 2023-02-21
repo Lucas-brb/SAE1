@@ -1,11 +1,9 @@
 function [Meilleure_config] = graphe_opti(n,N)
 %[Alpha] = graphe_opti(n)
-%   Population de taille 2n
+%   Population de taille 4n
 %   Optimisation à N itérations
 %   Graphe avec y=chauffage et x=numéro itération
 %   Un point représente la meilleure configuration de l'itération
-
-% m=m+1 en 15s et m doit aller à 4*n*N --> Temps= n*N (min)
 
 Sommets_Bat=[-30	40	0;
 40	40	0
@@ -105,19 +103,18 @@ CONS=zeros(4*n,N);
 % 1e colonne= les individus à la 1e itération
 % 1e ligne= Un individu à toutes les itérations
 
-m=0;
+VARIANCE=zeros(N,5);
 Population=creation_population(n);
 Meilleure_config=[];
+tic
 for i=1:N
     Population=enfanter(Population);
     Population=mutation(Population);
-    
     for j=1:size(Population,1)
         Sommets_IndivJ=Rotation(Sommets_Bat,Population(j,5),centre_bat);
-        IrrJ=Calcul_Irrad(Sommets_IndivJ,Triangles_Bat);
+        IrrJ=Calcul_Irrad_1h(Sommets_IndivJ,Triangles_Bat);
         ConsoJ=f_chauffage(Population(j,:),IrrJ);
         CONS(j,i)=ConsoJ;
-        m=m+1
     end
     [Conso,I]=sort(CONS(:,i));
     Pop_triee=zeros(4*n,5);
@@ -127,11 +124,17 @@ for i=1:N
     Pop_triee = Pop_triee(1:2*n,:);
     CONSO_OPTI(i)=Conso(1);
     %meilleure conso de l'itération i
-    Meilleure_config=[Meilleure_config ; Pop_triee(1,:)]
+    Meilleure_config = [Meilleure_config ; Pop_triee(1,:)];
     Population=Pop_triee;
-    disp(N)
-    %scatter(X,CONSO_OPTI)
-    %hold on
+    V=var(Population);
+    VARIANCE(i,:)=V;
+    disp(i)
 end
-scatter(X,CONSO_OPTI)
+figure(1)
+plot(X,CONSO_OPTI,'*')
+title('Meilleure consommation par itération')
+figure(2)
+plot(X,VARIANCE(:,1),'r',X,VARIANCE(:,2),'g',X,VARIANCE(:,3),'b',X,VARIANCE(:,4),'m')
+title('Variance des paramètres')
+toc
 end

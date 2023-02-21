@@ -16,5 +16,4 @@ for i=1:nbr_mutation
     parametre_mute=randi(4);
     Population_nv(num,parametre_mute)=10+rand()*80;
 end
-
 end

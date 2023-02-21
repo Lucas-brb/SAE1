@@ -18,7 +18,7 @@ function [Population] = creation_population_fen(n)
 Population=zeros(2*n,5);
 
 for i=1:2*n
-    carac=[10+rand([1,4]).*80 0];
+    carac=[10+rand([1,4]).*80 -0.1761];
     Population(i,:)=carac;
 end
 

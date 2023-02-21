@@ -63,8 +63,8 @@ B33=1/(C24+D24+E24+C4+B4);
 B34=1/(C28+D28+E28+F28+C5+B5);
 B35=D10;
 
-
-C33=4900;
+C33 = 150;
+%C33=4900;
 %C33=Surf_Sol calcul a la main
 C34=C33;
 
@@ -73,8 +73,14 @@ D33=1;
 D34=0.5;
 D35=1;
 
-[C32,D39,D38,F39,F38]=Calcul_surf_mur_fenetre(Individu);
-C35=D39+D38+F39+F38;
+%[C32,D39,D38,F39,F38] = [432,6,72,45,45];
+C32 = 432;
+D39 = 6;
+D38 = 72;
+F39 = 45;
+F38 = 45;
+%[C32,D39,D38,F39,F38]=Calcul_surf_mur_fenetre(Individu);
+C35=168;
 
 E32=B32*C32*D32;
 E33=B33*C33*D33;
@@ -82,10 +88,10 @@ E34=B34*C34*D34;
 E35=B35*C35*D35;
 
 B38=1.1*(E32+E33+E34+E35);
-B39=G10*G11*312000;
+B39=G10*G11*15*10*12;
 %volume a la main
 
-I38=124800;
+I38=600;
 %Surface chauffee a la main
 
 % Irr tableau 4 colonnes et 24 lignes
@@ -117,5 +123,5 @@ for i=1:24
     Qc(i)=max(0, Ql(i)-Qg(i));
 end
 
-Chauffage_22Janvier=sum(Qc)
+Chauffage_22Janvier=sum(Qc);
 
